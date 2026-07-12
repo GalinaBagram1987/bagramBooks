@@ -26,18 +26,165 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;;
+  font-family: 'Inter', sans-serif;
   min-height: 100vh;
   background-color: #F2F1EF;
 }
 
 .container {
-  max-width: 75 rem; /* 1200 px; */
+  max-width: 75rem; /* 1200 px; */
   width: 83%;
   margin: 0 auto;
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
-  display: flex;
-  flex-wrap: wrap; /* ← разрешаем перенос */
-  gap: 1,875rem; /* ← отступы между элементами */
 }
+
+/* Родоначальник — yниверсальный контейнер сетки  для всей моей разметки*/
+.gridBlock {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* Заменяем фиксированные 5rem на адаптивный gap, 
+     чтобы на экранах около 1000px отступы тоже плавно уменьшались */
+  gap: clamp(1rem, 5vw, 5rem); /*1 минимум, 5vw адаптив проц от шир экрана, 5rem максимальное*/
+}
+
+/* Универсальный класс для КАЖДОЙ из 3-х колонок */
+.grid-equal-col {
+  flex: 1 1 0; /*1 (flex-grow) — коэффициент роста, 1 (flex-shrink) — коэффициент сжатия, 0 (flex-basis) — базовый (начальный) размер*/
+  min-width: 0; 
+  text-align: center;
+  line-height: 1.5; 
+  letter-spacing: 0.05em;
+  /* Делаем флекс-конт, чтобы сработал ниже margin-top: auto у кнопок */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Специфичные свойства ЕСЛИ колонка является картинкой */
+.grid-equal-col img{
+  width: 100%;
+  max-width: 350px;
+  height: auto;     
+  object-fit: contain; 
+}
+
+.grid-equal-col p {
+  font-size: 18px;
+}
+
+/* Группа кнопок */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin-top: auto; /*прижмет к низу кнопки, даст им один уровень*/
+  padding-top: 1.5rem;
+}
+/* Каждая кнопка стекло*/
+.btn {
+  /* 1. Стеклянный эффект (Полупрозрачный белый фон) */
+  background: rgba(242, 228, 221, 0.75); 
+  
+  /* Для эффекта стекла: размывает всё, что находится ПОД кнопкой */
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px); /* Поддержка для Safari */
+  
+   /* Вместо черного бордера — аккуратная, чуть более светлая рамка */
+  border: 1px solid rgba(255, 255, 255, 0.4); 
+  /* border: 1px solid  #4A3E3D; */
+  
+   /* 2. Геометрия и текст */
+  border-radius: 12px; 
+  padding: 12px 28px;
+  cursor: pointer; /*делает курсор рукой*/
+  position: relative; 
+  overflow: hidden; /* Прячет блик за пределами кнопки */
+  
+  /* 3. тень */
+  box-shadow: 0 8px 24px rgba(74, 62, 61, 0.12);
+  
+  /* Плавность для всех базовых переходов */
+  transition: all 0.3s ease;
+}
+
+/* 4. СОЗДАНИЕ ГЛЯНЦЕВОГО ПЕРЕЛИВА */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Блик спрятан слева */
+  width: 60%;
+  height: 100%;
+  /* белый лучик света */
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.6), 
+    transparent
+  );
+  transform: skewX(-25deg); /* Наклон луча */
+}
+
+/* 5. ЭФФЕКТЫ ПРИ НАВЕДЕНИИ (HOVER) */
+.btn:hover {
+  transform: scale(1.05); /* увеличение на 5% */
+  background: rgba(242, 228, 221, 0.9); /* Кнопка становится чуть плотнее */
+  
+  /* Тень становится глубже, кнопка «приподнимается» */
+  box-shadow: 0 12px 32px rgba(74, 62, 61, 0.2); 
+}
+
+/* Запуск блика слева направо при наведении */
+.btn:hover::before {
+  left: 150%;
+  transition: left 0.7s ease-out; 
+}
+
+a {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1.5;
+  color: #4A3E3D; /* оттенок для текста*/
+  text-decoration: none; /*нет подчеркивания*/
+}
+@media(max-width: 950px) {
+  .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .gridBlock {
+    flex-direction: column; /* Элементы встают друг под друга */
+    align-items: center;
+    gap: 2rem;          
+  }
+
+  .grid-equal-col {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.3;
+  }
+  /* Специфичные свойства ЕСЛИ колонка является картинкой */
+  .grid-equal-col img{
+    max-width: 100%; 
+  }
+
+   .grid-equal-col h1 {
+    margin-bottom: 0.2rem; 
+  }
+  .grid-equal-col h2 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media(max-width: 768px) {
+  .grid-equal-col p {
+    font-size: 16px;
+  }
+}
+
+
+

@@ -59,7 +59,7 @@
     }
     
     p {
-      line-height: 1;
+      line-height: 1.3;
       font-size: 16px;
     }
   }
