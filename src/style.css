@@ -149,6 +149,23 @@ a {
   color: #4A3E3D; /* оттенок для текста*/
   text-decoration: none; /*нет подчеркивания*/
 }
+
+/*Картинки стилизуем*/
+img {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* плавность при наведении */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+img:hover {
+  transform: translateY(-4px); /* Картинка слегка приподнимается вверх */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); /* Тень становится глубже */
+}
+
+
+/*Адаптивность*/
+
 @media(max-width: 950px) {
   .container {
     padding-top: 1rem;
