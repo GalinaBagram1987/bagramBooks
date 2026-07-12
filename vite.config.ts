@@ -14,5 +14,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: '/',  // для своего домена — корень
+  base: '/bagramBooks',  // для своего домена — корень
 });
