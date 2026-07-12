@@ -1,5 +1,56 @@
-# Vue 3 + TypeScript + Vite
+Сайт писателя Галины Баграм
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Адаптивный современный веб-сайт-портфолио для презентации и скачивания книг в жанре фантастики и фэнтези. 
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 🛠 Стек технологий
+*   **Фреймворк:** Vue 3 (Composition API, `<script setup>`)
+*   **Язык:** TypeScript
+*   **Сборщик:** Vite
+*   **Стили:** CSS3 (Глассморфизм, адаптивный Flexbox без медиазапросов, функция `clamp()`)
+*   **Тестирование:** Playwright (End-to-End тестирование ссылок и скачивания файлов)
+*   **Автоматизация:** Makefile
+
+ команды автоматизированы
+
+1. **Установка всех зависимостей проекта:**
+   ```bash
+   make install
+   ```
+
+2. **Запуск локального сервера для разработки:**
+   ```bash
+   make dev
+   ```
+   *После этого сайт будет доступен по адресу: `http://localhost:5173/`*
+
+3. **Сборка проекта для продакшна (в папку `dist`):**
+   ```bash
+   make build
+   ```
+
+4. **Проверка уже собранного проекта локально:**
+   ```bash
+   make preview
+   ```
+
+## Тестирование и проверка кода
+
+В проекте настроено автоматическое тестирование кнопок перехода на книжные площадки (Литнет, Автор.Тудей, Литрес) и скачивания файлов с Яндекс.Диска.
+
+*   **Запуск всех тестов в консоли:**
+    ```bash
+    make test
+    ```
+*   **Запуск тестов в визуальном интерактивном режиме (UI Playwright):**
+    ```bash
+    make test-ui
+    ```
+*   **Проверка кода на синтаксические ошибки (Linter):**
+    ```bash
+    make lint
+    ```
+*   **Автоматическое исправление мелких ошибок и форматирование кода:**
+    ```bash
+    make lint-fix
+    make format
+    ```
